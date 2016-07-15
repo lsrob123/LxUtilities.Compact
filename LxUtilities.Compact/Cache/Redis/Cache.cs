@@ -12,7 +12,7 @@ using StackExchange.Redis;
 namespace LxUtilities.Compact.Cache.Redis
 {
     
-    public class Cache : IGenericCache
+    public class Cache : IDisposable, ICacheWithHashes
     {
         private readonly ConnectionMultiplexer _connectionMultiplexer;
         protected readonly ILogger Logger;
@@ -222,6 +222,17 @@ namespace LxUtilities.Compact.Cache.Redis
             return dict;
         }
 
+        public void HashSet(string hashKey, IDictionary<string, string> nameValues)
+        {
+            Database.HashSet(hashKey, nameValues.Select(x => new HashEntry(x.Key, x.Value)).ToArray());
+        }
+
+        public ICollection<string> HashGet(string hashKey, params string[] names)
+        {
+            var hashValues= Database.HashGet(hashKey,names.Select(x=>(RedisValue)x).ToArray());
+            var results = hashValues.Select(x => x.ToString()).ToList();
+            return results;
+        }
     }
 }
 
