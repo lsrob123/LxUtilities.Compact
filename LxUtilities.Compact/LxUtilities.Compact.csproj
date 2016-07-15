@@ -80,7 +80,7 @@
     <Compile Include="Serialization\JsonSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ServiceBus\NServiceBus\" />
+    <Folder Include="ServiceBus\MassTransit\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
