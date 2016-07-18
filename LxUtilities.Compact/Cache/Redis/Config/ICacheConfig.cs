@@ -1,6 +1,6 @@
 ﻿namespace LxUtilities.Compact.Cache.Redis.Config
 {
-    public interface IConfig
+    public interface ICacheConfig
     {
         /// <summary>
         /// The host of Redis Server

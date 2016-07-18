@@ -2,7 +2,7 @@
 
 namespace LxUtilities.Compact.Cache.Redis.Config
 {
-    public class ConfigSectionHandler : ConfigurationSection, IConfig
+    public class CacheConfigSectionHandler : ConfigurationSection, ICacheConfig
     {
         [ConfigurationProperty("hosts")]
         public CacheHostCollection RedisHosts => this["hosts"] as CacheHostCollection;
@@ -75,9 +75,9 @@ namespace LxUtilities.Compact.Cache.Redis.Config
         [ConfigurationProperty("password", IsRequired = false)]
         public string Password => this["password"] as string;
 
-        public static ConfigSectionHandler GetConfig()
+        public static CacheConfigSectionHandler GetConfig()
         {
-            return ConfigurationManager.GetSection("redisCacheClient") as ConfigSectionHandler;
+            return ConfigurationManager.GetSection("redisCacheClient") as CacheConfigSectionHandler;
         }
     }
 }

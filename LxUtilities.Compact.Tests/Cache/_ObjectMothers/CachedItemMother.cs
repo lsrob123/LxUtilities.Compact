@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace LxUtilities.Compact.Tests._ObjectFactories
+namespace LxUtilities.Compact.Tests.Cache._ObjectMothers
 {
-    public class CachedItem
+    internal class CachedItem
     {
         public string SomeProperty { get; set; }
     }
 
-    public static class CachedItemFactory
+    internal static class CachedItemMother
     {
         public static CachedItem Random()
         {

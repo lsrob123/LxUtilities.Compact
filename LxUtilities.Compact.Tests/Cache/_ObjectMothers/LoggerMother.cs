@@ -1,9 +1,9 @@
 ﻿using System;
 using LxUtilities.Contracts.Logging;
 
-namespace LxUtilities.Compact.Tests._ObjectFactories
+namespace LxUtilities.Compact.Tests.Cache._ObjectMothers
 {
-    public class DoNothingLogger : ILogger
+    internal class DoNothingLogger : ILogger
     {
         public void LogInfo(string message)
         {
@@ -22,7 +22,7 @@ namespace LxUtilities.Compact.Tests._ObjectFactories
         }
     }
 
-    public static class LoggerFactory
+    public static class LoggerMother
     {
         public static ILogger DoNothingLogger()
         {
