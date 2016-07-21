@@ -4,7 +4,7 @@ using MassTransit;
 
 namespace LxUtilities.Compact.Tests.ServiceBus._ObjectMothers
 {
-    internal static class SingleBusControlMother
+    public static class SingleBusControlMother
     {
         public static ISingleBusControl<MassTransitBus> WithDefault(BusEndpoint endpoint)
         {

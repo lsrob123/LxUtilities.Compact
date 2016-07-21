@@ -2,11 +2,10 @@
 using LxUtilities.Compact.ServiceBus.MassTransit;
 using LxUtilities.Contracts.ServiceBus;
 using MassTransit;
-using NUnit.Framework;
 
 namespace LxUtilities.Compact.Tests.ServiceBus._ObjectMothers
 {
-    internal class DoSomethingCommand : IBusCommand
+    public class DoSomethingCommand : IBusCommand
     {
         public DoSomethingCommand(Guid someData)
         {
@@ -16,7 +15,7 @@ namespace LxUtilities.Compact.Tests.ServiceBus._ObjectMothers
         public Guid SomeData { get; }
     }
 
-    internal class SomethingHappenedCommand : IBusEvent
+    public class SomethingHappenedCommand : IBusEvent
     {
         public SomethingHappenedCommand(Guid someData)
         {
@@ -26,15 +25,14 @@ namespace LxUtilities.Compact.Tests.ServiceBus._ObjectMothers
         public Guid SomeData { get; }
     }
 
-    internal static class BusConsumerMother
+    public static class BusConsumerMother
     {
-        public static GenericBusBusConsumer<DoSomethingCommand> WithCommand(DoSomethingCommand command,
-            Action<ConsumeContext<DoSomethingCommand>, object> processCommandAction)
+        public static GenericBusBusConsumer<DoSomethingCommand> WithCommand(
+            Action<ConsumeContext<DoSomethingCommand>, object> processCommandAction, DoSomethingCommand command)
         {
             if (command == null)
                 throw new ArgumentNullException(nameof(command));
             return new GenericBusBusConsumer<DoSomethingCommand>(processCommandAction, command);
         }
-
     }
 }

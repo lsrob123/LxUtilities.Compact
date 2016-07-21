@@ -2,7 +2,7 @@
 
 namespace LxUtilities.Compact.Tests.Cache._ObjectMothers
 {
-    internal static class CacheMother
+    public static class CacheMother
     {
         public static Compact.Cache.Redis.Cache Default()
         {

@@ -27,6 +27,20 @@ namespace LxUtilities.Compact.ServiceBus.MassTransit
         public IBusHostConfig Config { get; private set; }
         public MassTransitBus Instance { get; private set; }
 
+        public void Start()
+        {
+            BusControlLock.EnterWriteLock();
+            try
+            {
+                var busControl = Instance as IBusControl;
+                busControl?.Start();
+            }
+            finally
+            {
+                BusControlLock.ExitWriteLock();
+            }
+        }
+
         public void Stop()
         {
             BusControlLock.EnterWriteLock();
@@ -46,10 +60,10 @@ namespace LxUtilities.Compact.ServiceBus.MassTransit
             Config = config;
             ReceiveEndpoints = endpoints?.ToList() ?? new List<BusEndpoint>();
 
-            CreateAndStart();
+            Create();
         }
 
-        protected void CreateAndStart()
+        protected void Create()
         {
             BusControlLock.EnterUpgradeableReadLock();
             try
@@ -85,8 +99,6 @@ namespace LxUtilities.Compact.ServiceBus.MassTransit
                     var busControl = (IBusControl) Instance;
                     if (busControl == null)
                         throw new NullReferenceException("Failed to create BusControl");
-
-                    busControl.Start();
                 }
                 finally
                 {
@@ -98,5 +110,6 @@ namespace LxUtilities.Compact.ServiceBus.MassTransit
                 BusControlLock.ExitUpgradeableReadLock();
             }
         }
+
     }
 }

@@ -4,6 +4,7 @@ namespace LxUtilities.Contracts.ServiceBus
     {
         TBusControl Instance { get; }
         IBusHostConfig Config { get; }
+        void Start();
         void Stop();
     }
 }

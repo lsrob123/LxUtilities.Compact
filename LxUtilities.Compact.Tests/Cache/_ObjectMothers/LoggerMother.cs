@@ -3,7 +3,7 @@ using LxUtilities.Contracts.Logging;
 
 namespace LxUtilities.Compact.Tests.Cache._ObjectMothers
 {
-    internal class DoNothingLogger : ILogger
+    public class DoNothingLogger : ILogger
     {
         public void LogInfo(string message)
         {

@@ -14,9 +14,11 @@ namespace LxUtilities.Compact.Tests.ServiceBus.MassTransit
         {
             var endpointName = DateTime.Today.ToString("yyyyMMdd");
             var command=new DoSomethingCommand(Guid.NewGuid());
-            var consumer = BusConsumerMother.WithCommand(command, ProcessCommand);
+            var consumer = BusConsumerMother.WithCommand(ProcessCommand, command);
             var singleBusControl =
                 SingleBusControlMother.WithDefault(BusEndpointMother.WithConsumer(endpointName, consumer));
+
+            singleBusControl.Start();
 
             //var sendEndpointUri = new Uri(singleBusControl.Config.Uri).AppendToPath(endpointName);
             //var sendEndpoint = await singleBusControl.Instance.GetSendEndpoint(sendEndpointUri);

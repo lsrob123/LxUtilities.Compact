@@ -11,18 +11,18 @@ namespace LxUtilities.Compact.ServiceBus.MassTransit
             Initialize(endpointName, consumers);
         }
 
-        public BusEndpoint(string endpointName, IEnumerable <IConsumer> consumers)
+        public BusEndpoint(string endpointName, IEnumerable<IConsumer> consumers)
         {
             Initialize(endpointName, consumers);
         }
+
+        public string EndpointName { get; protected set; }
+        public IList<IConsumer> Consumers { get; protected set; }
 
         private void Initialize(string endpointName, IEnumerable<IConsumer> consumers)
         {
             EndpointName = endpointName;
             Consumers = consumers?.ToList() ?? new List<IConsumer>();
         }
-
-        public string EndpointName { get; protected set; }
-        public IList<IConsumer> Consumers { get; protected set; }
     }
 }

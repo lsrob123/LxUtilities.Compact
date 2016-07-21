@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using LxUtilities.Contracts.ServiceBus;
 using MassTransit;
+using MassTransit.Pipeline;
 using MassTransit.Util;
 
 namespace LxUtilities.Compact.ServiceBus.MassTransit
@@ -12,7 +13,16 @@ namespace LxUtilities.Compact.ServiceBus.MassTransit
         {
             var sendEndpointUri = new Uri(hostUri).AppendToPath(endpointName);
             var sendEndpoint = await (bus as ISendEndpointProvider).GetSendEndpoint(sendEndpointUri);
-            await sendEndpoint.Send(command);
+            await sendEndpoint.Send(command, context =>
+            {
+                var b = context.Message;
+            }).ContinueWith((task, o) =>
+            {
+                var a = command;
+            },command);
+
+            
         }
     }
+
 }

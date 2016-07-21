@@ -2,7 +2,7 @@
 
 namespace LxUtilities.Compact.Tests.ServiceBus._ObjectMothers
 {
-    internal class BusHostConfig : IBusHostConfig
+    public class BusHostConfig : IBusHostConfig
     {
         public BusHostConfig(string uri, string username, string password)
         {
