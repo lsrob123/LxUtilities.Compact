@@ -41,12 +41,12 @@ namespace LxUtilities.Compact.Tests.WinForm
 
             //await _singleBusControl.Instance.Send(_singleBusControl.Config.Uri, _endpointName, _command);
 
-            await _singleBusControl.Instance.Send(_singleBusControl.Config.Uri, "LxUtilities.Compact.Tests.ServiceBus._ObjectMothers:DoSomethingCommand", _command);
+            //await _singleBusControl.Instance.Send(_singleBusControl.Config.Uri, "LxUtilities.Compact.Tests.ServiceBus._ObjectMothers:DoSomethingCommand", _command);
 
-            //await _singleBusControl.Instance.Publish(_command, context =>
-            //{
-            //    var a = context.Message;
-            //});
+            await _singleBusControl.Instance.Publish(_command, context =>
+            {
+                var a = context.Message;
+            });
         }
 
         private void ProcessCommand(ConsumeContext<DoSomethingCommand> context, object state)

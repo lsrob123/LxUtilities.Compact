@@ -20,17 +20,26 @@ namespace LxUtilities.Compact.Tests.ServiceBus.MassTransit
 
             singleBusControl.Start();
 
+            await singleBusControl.Instance.Publish(command, context =>
+            {
+                Console.WriteLine("Publish callback is called now.");
+                Assert.IsNotNull(context);
+                Assert.IsNotNull(context.Message);
+            });
+
             //var sendEndpointUri = new Uri(singleBusControl.Config.Uri).AppendToPath(endpointName);
             //var sendEndpoint = await singleBusControl.Instance.GetSendEndpoint(sendEndpointUri);
             //await sendEndpoint.Send(command);
 
             await singleBusControl.Instance.Send(singleBusControl.Config.Uri, endpointName, command);
 
-            //singleBusControl.Stop();
+            singleBusControl.Stop();
         }
 
         private static void ProcessCommand(ConsumeContext<DoSomethingCommand> context, object state)
         {
+            Console.WriteLine("Processing DoSomethingCommand now.");
+            Assert.IsNotNull(context);
             Assert.IsNotNull(context.Message);
             Assert.IsNotNull(state);
             Assert.IsAssignableFrom<DoSomethingCommand>(state);
